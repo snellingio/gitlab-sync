@@ -11,7 +11,7 @@ $client = new Gitlab\Client('https://git.onroi.com/api/v3/');
 $client->authenticate(GITLAB_API_KEY, Gitlab\Client::AUTH_URL_TOKEN);
 
 // Init project
-$project            = new Gitlab\Model\Project(GITLAB_PROJECT_ID, $client);
+$project = new Gitlab\Model\Project(GITLAB_PROJECT_ID, $client);
 
 // Get master issue
 $master_issue       = new Gitlab\Model\Issue($project, GITLAB_MASTER_ISSUE, $client);
