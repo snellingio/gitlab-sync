@@ -1,0 +1,13 @@
+{
+    "name": "gitlab-sync",
+    "authors": [
+        {
+            "name": "Sam Snelling",
+            "email": "sam@onroi.com"
+        }
+    ],
+    "require": {
+        "roave/security-advisories": "dev-master",
+        "m4tthumphrey/php-gitlab-api": "dev-master"
+    }
+}
