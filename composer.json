@@ -8,6 +8,7 @@
     ],
     "require": {
         "roave/security-advisories": "dev-master",
-        "m4tthumphrey/php-gitlab-api": "dev-master"
+        "m4tthumphrey/php-gitlab-api": "dev-master",
+        "maknz/slack": "^1.7"
     }
 }

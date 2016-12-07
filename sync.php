@@ -1,20 +1,16 @@
 <?php
 
-define('GITLAB_API_KEY', 'x-hEr2ohT6pMPmj3KFDS');
-define('GITLAB_PROJECT_ID', 5);
-define('GITLAB_MASTER_ISSUE', 1);
-
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/config.inc.php';
 
 // Setup GitLab
-$client = new Gitlab\Client('https://git.onroi.com/api/v3/');
-$client->authenticate(GITLAB_API_KEY, Gitlab\Client::AUTH_URL_TOKEN);
+$gitlab = new Gitlab\Client(GITLAB_API_URL);
+$gitlab->authenticate(GITLAB_API_KEY, Gitlab\Client::AUTH_URL_TOKEN);
 
 // Init project
-$project = new Gitlab\Model\Project(GITLAB_PROJECT_ID, $client);
+$project = new Gitlab\Model\Project(GITLAB_PROJECT_ID, $gitlab);
 
 // Get master issue
-$master_issue       = new Gitlab\Model\Issue($project, GITLAB_MASTER_ISSUE, $client);
+$master_issue       = new Gitlab\Model\Issue($project, GITLAB_MASTER_ISSUE, $gitlab);
 $master_description = @$master_issue->show()->getData()[0]['description'] ?? '';
 
 // Make sure master description is there
@@ -65,7 +61,7 @@ $changes = false;
 // Cycle through all the issues
 foreach ($issues as $issue) {
     // Get specific issue
-    $specific_issue = new Gitlab\Model\Issue($project, $issue['id'], $client);
+    $specific_issue = new Gitlab\Model\Issue($project, $issue['id'], $gitlab);
     $state          = @$specific_issue->show()->getData()[0]['state'];
 
     // Discover if issue specific issue is *really* Open or Closed

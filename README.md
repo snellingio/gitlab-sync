@@ -1,4 +1,4 @@
-# GitLab Sync
+# GitLab Tools
 
 This is a simple project management cron for updating GitLab issues.
 
