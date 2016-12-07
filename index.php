@@ -74,7 +74,7 @@ foreach ($issues as $issue) {
         $open = false;
     }
 
-    // Change master issue description if the issue is in sync
+    // Change master issue description if the issue is *not* in sync
     if ($issue['open'] !== $open) {
         echo 'Issue #' . $issue['id'] . ' is currently ' . ($issue['open'] ? 'open' : 'closed') . ' when it should be ' . ($open ? 'open' : 'closed') . PHP_EOL;
         $line               = $open ? str_replace('* [x]', '* [ ]', $issue['text']) : str_replace('* [ ]', '* [x]', $issue['text']);
