@@ -8,7 +8,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 // Setup GitLab
 $client = new Gitlab\Client('https://git.onroi.com/api/v3/');
-$client->authenticate(GITLAB_API_KEY, \Gitlab\Client::AUTH_URL_TOKEN);
+$client->authenticate(GITLAB_API_KEY, Gitlab\Client::AUTH_URL_TOKEN);
 
 // Init project
 $project            = new Gitlab\Model\Project(GITLAB_PROJECT_ID, $client);
