@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "734bc1e297a34f4fbbe2ff56e207c7e0",
-    "content-hash": "d4d6b2ee062df91698e7a4e5b57ddf76",
+    "hash": "d681905a1c433e638934ca484df8245c",
+    "content-hash": "2bca7608cb4f25372f286a2428eb5780",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -332,6 +332,36 @@
             "time": "2015-06-03 03:35:16"
         },
         {
+            "name": "onroi/pattern-parser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.onroi.com/onroi/pattern-parser.git",
+                "reference": "231146d102ddfaca1040ce3ecd144de7eeab04ed"
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "OnROI\\PatternParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Snelling",
+                    "email": "sam@onroi.com"
+                }
+            ],
+            "description": "A simple, powerful, text pattern parsing library",
+            "time": "2016-12-08 02:01:44"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -517,7 +547,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "roave/security-advisories": 20,
-        "m4tthumphrey/php-gitlab-api": 20
+        "m4tthumphrey/php-gitlab-api": 20,
+        "onroi/pattern-parser": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
