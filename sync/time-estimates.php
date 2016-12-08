@@ -39,7 +39,7 @@ foreach ($milestone_issues as $issue) {
 $comments = [];
 
 // Init parser
-$parser = new OnROI\PatternParser\PatternParser();
+$patternParser = new OnROI\PatternParser\PatternParser();
 
 // Loop through good issues
 foreach ($issues as $issue) {
@@ -65,29 +65,40 @@ foreach ($issues as $issue) {
         $clean_comment = trim(str_replace(['estimate', ':', '-', 'our', 'r', 'in', 'ute', 's'], '', strtolower($comment)));
 
         // Parse two different scenarios, hours, and hours and minutes
-        $parsed_hours_minutes = $parser->process($clean_comment, '{hours}h {minutes}m');
-        $parsed_hours         = $parser->process($clean_comment, '{hours}h');
+        $parsed_hours_minutes = $patternParser->process($clean_comment, '{hours}h {minutes}m');
+        $parsed_hours         = $patternParser->process($clean_comment, '{hours}h');
+        $parsed_minutes       = $patternParser->process($clean_comment, '{minutes}m');
 
         // We could not parse hours, ruh roh. This should always be parsed at a minimum.
-        if (empty($parsed_hours)) {
+        if (empty($parsed_hours) && empty($parsed_minutes)) {
             continue;
         }
 
+        $hours   = 0;
+        $minutes = 0;
+
         // Set estimate to parsed hours
-        $estimate = (float) filter_var($parsed_hours['hours'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        if (!empty($parsed_hours)) {
+            // Parse & filter hours
+            $hours = (float) filter_var($parsed_hours['hours'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        }
+
+        if (!empty($parsed_minutes)) {
+            // Parse & filter minutes
+            $minutes = (float) filter_var($parsed_minutes['minutes'], FILTER_SANITIZE_NUMBER_INT);
+        }
 
         if (!empty($parsed_hours_minutes)) {
-
             // Parse & filter hours and minutes
             $hours   = (float) filter_var($parsed_hours_minutes['hours'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
             $minutes = (int) filter_var($parsed_hours_minutes['minutes'], FILTER_SANITIZE_NUMBER_INT);
-
-            // Parse in 15 minute increments
-            $minutes_to_hours = ceil($minutes / 15) * .25;
-
-            // Set the time
-            $estimate = $hours + $minutes_to_hours;
         }
+
+        // Parse in 15 minute increments
+        $minutes_to_hours = ceil($minutes / 15) * .25;
+
+        // Set the time
+        $estimate = $hours + $minutes_to_hours;
 
         // Build comments
         $comments[] = [
