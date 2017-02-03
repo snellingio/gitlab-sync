@@ -1,7 +1,7 @@
 <?php
 
 define('GITLAB_API_URL', 'https://git.onroi.com/api/v3/');
-define('GITLAB_API_KEY', '9U2W5_3VrATfy7yR84Z5');
+define('GITLAB_API_KEY', '9U2W5_3VrATfy7yR84Z5'); // revoked
 
 define('GITLAB_PROJECT_ID', 5);
 define('GITLAB_MASTER_ISSUE', 1);
